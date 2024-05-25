@@ -1,0 +1,59 @@
+{
+  "dna": "5506f78b3857d578242f725691b14c22fc29544f",
+  "name": "All-Time Stock Price Data AAPL",
+  "description": "This comprehensive dataset provides historical stock price data spanning various time periods, offering insights into the fluctuations and trends in the stock market over time.",
+  "path": "https://ipfs.io/ipfs/QmQqWBJKdWZwy8PE3rutzQa2ux6E2V9qaqt4YJWEiEFZ4X",
+  "external_url": "https://www.kaggle.com/datasets/hchsmost/test-dataset/data",
+  "licenses": [{"name": "CC0-1.0"}],
+  "resources": [
+    {
+      "path": "AAPL.csv",
+      "description": "AAPL",
+      "schema": {
+        "fields": [
+          {
+            "name": "Date",
+            "description": "String field description",
+            "type": "DateTime"
+          },
+          {
+            "name": "NumberField",
+            "description": "Number field description",
+            "type": "number"
+          },
+          {
+            "name": "DateTimeField",
+            "description": "Date time field description",
+            "type": "datetime"
+          }]
+      }
+    },
+    {
+      "path": "my-awesome-data_2.csv",
+      "description": "This is my awesome data!",
+      "schema": {
+        "fields": [
+          {
+            "name": "StringField",
+            "description": "String field description",
+            "type": "string"
+          },
+          {
+            "name": "NumberField",
+            "description": "Number field description",
+            "type": "number"
+          },
+          {
+            "name": "DateTimeField",
+            "description": "Date time field description",
+            "type": "datetime"
+          }
+        ]
+      }
+    },
+    {
+      "path": "my-awesome-extra-file.txt",
+      "description": "This is my awesome extra file!"
+    }
+  ]
+}
