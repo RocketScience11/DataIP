@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>DataIP</h1>
+        <form action="/ipRegister" method="post">
+            <div class="form-group">
+                <label for="nft_address">NFT Address:</label>
+                <input type="text" id="nft_address" name="content1" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="token_id">Token ID:</label>
+                <input type="text" id="token_id" name="content2" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+        {% if ip_info %}
+            <div class="alert alert-success mt-4" role="alert">
+                <h4 class="alert-heading">Registration Successful!</h4>
+                <p>NFT Address: {{ ip_info.nft_address }}</p>
+                <p>Token ID: {{ ip_info.token_id }}</p>
+                <p>IP ID: {{ ip_info.ip_id }}</p>
+            </div>
+        {% elif error %}
+            <div class="alert alert-danger mt-4" role="alert">
+                <h4 class="alert-heading">Error!</h4>
+                <p>{{ error }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
