@@ -11,6 +11,11 @@
         <h1>Register IP</h1>
         <form action="/ipRegister" method="post">
             <div class="form-group">
+                <label for="api_url">Huggingface dataset URL:</label>
+                <input type="text" id="api_url" name="api_url" class="form-control">
+            </div>
+            <button type="button" class="btn btn-success mt-3" onclick="mintNFT()">Mint NFT</button>
+            <div class="form-group mt-3">
                 <label for="nft_address">NFT Address:</label>
                 <input type="text" id="nft_address" name="content1" class="form-control" required>
             </div>
@@ -40,6 +45,20 @@
                 <pre>{{ json_content | tojson(indent=4) }}</pre>
             </div>
         {% endif %}
+
+        {% if api_data %}
+            <div class="mt-4">
+                <h2>API Data:</h2>
+                <pre>{{ api_data | tojson(indent=4) }}</pre>
+            </div>
+        {% endif %}
     </div>
+
+    <script>
+        function mintNFT() {
+            // Add the minting logic here
+            alert('Minting NFT...');
+        }
+    </script>
 </body>
 </html>

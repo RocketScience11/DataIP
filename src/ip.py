@@ -50,7 +50,7 @@ def attach_license_terms(story_client, ip_id, license_template, terms_id):
     print("License Terms already attached to this IPA")
   return response
 
-def mint_ip(ip_id, license_template, terms_id, amount, receiver_address):
+def mint_ip(story_client, ip_id, license_template, terms_id, amount, receiver_address):
   response = story_client.License.mintLicenseTokens(
     licensor_ip_id=ip_id,
     #"0x431A7Cc86381F9bA437b575D3F9E931652fFbbdd",  # Licensor IP ID

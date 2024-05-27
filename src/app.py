@@ -1,15 +1,17 @@
 import json
 import os
+import requests
 from flask import Flask, render_template, request
 from dotenv import load_dotenv
 from web3 import Web3
 from story_protocol_python_sdk import StoryClient
-import ip
 
 app = Flask(__name__)
 app.debug = True
 
 load_dotenv()
+
+API_TOKEN = os.getenv('API_TOKEN')
 
 def start_client():
     private_key = os.getenv('WALLET_PRIVATE_KEY')
@@ -19,15 +21,23 @@ def start_client():
     story_client = StoryClient(web3, account, 11155111)
     return story_client
 
+def query(api_url):
+    headers = {"Authorization": f"Bearer {API_TOKEN}"}
+    response = requests.get(api_url, headers=headers)
+    response.raise_for_status()  # Ensure we raise an error for bad status codes
+    return response.json()
+
 @app.route("/ipRegister", methods=["GET", "POST"])
 def ip_register():
     ip_info = None
     error = None
     json_content = None
+    api_data = None
 
     if request.method == "POST":
         nft_address = request.form.get('content1')
         token_id = request.form.get('content2')
+        api_url = request.form.get('api_url')
         story_client = start_client()
 
         if not nft_address or not token_id:
@@ -51,10 +61,14 @@ def ip_register():
                 with open('ip_json.json', 'r') as ip_json:
                     json_content = json.load(ip_json)
 
+                # Query the external API if the API URL is provided
+                if api_url:
+                    api_data = query(api_url)
+
             except Exception as e:
                 error = str(e)
 
-    return render_template("ip_register.html", ip_info=ip_info, error=error, json_content=json_content)
+    return render_template("ip_register.html", ip_info=ip_info, error=error, json_content=json_content, api_data=api_data)
 
 if __name__ == "__main__":
     app.run()
