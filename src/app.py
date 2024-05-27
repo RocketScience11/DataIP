@@ -4,6 +4,7 @@ from flask import Flask, render_template, request
 from dotenv import load_dotenv
 from web3 import Web3
 from story_protocol_python_sdk import StoryClient
+import ip
 
 app = Flask(__name__)
 app.debug = True
@@ -22,6 +23,7 @@ def start_client():
 def ip_register():
     ip_info = None
     error = None
+    json_content = None
 
     if request.method == "POST":
         nft_address = request.form.get('content1')
@@ -32,7 +34,11 @@ def ip_register():
             error = "Missing nft_address or token_id"
         else:
             try:
-                asset_register = ip.register_asset(story_client, nft_address, token_id)
+                # Ensure the types match the expected function signature
+                token_id_int = int(token_id)  # Assuming token_id should be an integer
+                nft_address_str = str(nft_address)  # Assuming nft_address should be a string
+
+                asset_register = ip.register_asset(story_client, nft_address_str, token_id_int)
                 ip_info = {
                     "nft_address": nft_address,
                     "token_id": token_id,
@@ -41,10 +47,14 @@ def ip_register():
 
                 with open('ip_json.json', 'w') as ip_json:
                     json.dump(ip_info, ip_json, indent=7)
+
+                with open('ip_json.json', 'r') as ip_json:
+                    json_content = json.load(ip_json)
+
             except Exception as e:
                 error = str(e)
 
-    return render_template("ip_register.html", ip_info=ip_info, error=error)
+    return render_template("ip_register.html", ip_info=ip_info, error=error, json_content=json_content)
 
 if __name__ == "__main__":
     app.run()

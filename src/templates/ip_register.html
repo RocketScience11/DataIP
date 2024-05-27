@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1>DataIP</h1>
+        <h1>Register IP</h1>
         <form action="/ipRegister" method="post">
             <div class="form-group">
                 <label for="nft_address">NFT Address:</label>
@@ -31,6 +31,13 @@
             <div class="alert alert-danger mt-4" role="alert">
                 <h4 class="alert-heading">Error!</h4>
                 <p>{{ error }}</p>
+            </div>
+        {% endif %}
+
+        {% if json_content %}
+            <div class="mt-4">
+                <h2>JSON Content:</h2>
+                <pre>{{ json_content | tojson(indent=4) }}</pre>
             </div>
         {% endif %}
     </div>
