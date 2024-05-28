@@ -19,6 +19,12 @@ python src/app.py
 
 Open http://127.0.0.1:5000/ipRegister in your browser.
 
+**To pin the data to IPFS using Pinata**
+
+Enter the Huugingface URL and press Pin to IPFS.
+
 **To register an IP for your data**
 
-Enter NFT address and token ID and click Register
+Enter NFT address and token ID and click Register.
+
+
